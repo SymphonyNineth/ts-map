@@ -1,0 +1,22 @@
+{
+  "devDependencies": {
+    "@types/node": "^18.0.0"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.182"
+  },
+  "type": "module",
+  "name": "ts-map",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
