@@ -1,8 +1,6 @@
-import { transform, changePath } from "ts-automap";
-import Source from "./interfaces/Source";
-import Destination from "./interfaces/Destination";
-changePath("interfaces");
-const sourceData: Source = {
+import { transform } from "ts-automap";
+import { Frontend, API } from "./interfaces/shared";
+const frontendData: Frontend = {
   name: "Anna",
   age: 23,
   numbers: [1, 2, 3],
@@ -13,13 +11,25 @@ const sourceData: Source = {
   },
 };
 
+const backendData: API = {
+  name: "Anna",
+  names: ["John", "Doe"],
+  bio: "Moldova",
+  someField: "smth",
+  profession: {
+    field: "Programming",
+    level: "Junior",
+  },
+  birthYear: 1023,
+};
+
 console.log(
-  transform<Source, Destination>(sourceData, "Destination", {
+  transform<Frontend, API>(frontendData, "API", {
     bio: (src, dest) => {
-      dest.bio = "Developer";
+      dest.bio = "Developer" + src.age;
     },
-    profession: (src) => {
-      src.profession = {
+    profession: (src, dest) => {
+      dest.profession = {
         field: "Web",
         level: "Junior",
       };
@@ -27,5 +37,12 @@ console.log(
     birthYear: (src, dest) => {
       dest.birthYear = src.age;
     },
+  })
+);
+
+console.log(
+  transform<API, Frontend>(backendData, "Frontend", {
+    age: (src, dest) => (dest.age = new Date().getFullYear() - src.birthYear),
+    numbers: (src, dest) => (dest.numbers = [src.birthYear, src.birthYear - 22]),
   })
 );

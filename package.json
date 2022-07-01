@@ -1,11 +1,13 @@
 {
   "devDependencies": {
-    "@types/node": "^18.0.0"
+    "@types/app-root-dir": "^0.1.1",
+    "@types/node": "^18.0.0",
+    "ts-morph": "^15.1.0"
   },
   "dependencies": {
-    "@types/lodash": "^4.14.182"
+    "@types/lodash": "^4.14.182",
+    "app-root-dir": "^1.0.2"
   },
-  "type": "module",
   "name": "ts-map",
   "version": "1.0.0",
   "main": "index.js",

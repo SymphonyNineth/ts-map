@@ -10,7 +10,7 @@ export default function transform<S extends { [index: string]: any }, D extends 
   interfaceName: string,
   forMembers?: Partial<ForMembers<D, S>>
 ): D {
-  const newObj = extract(source, getKeys(interfaceName));
+  const newObj = extract(source, getKeys(interfaceName)!);
   if (forMembers) {
     Object.keys(forMembers).forEach((key: keyof typeof forMembers) => forMembers[key]?.(source, newObj as unknown as D));
   }

@@ -1,14 +1,18 @@
 import { Project } from "ts-morph";
-let path = "/";
-function changePath(newPath: string) {
-  path = newPath;
-}
-
 const getKeys = (intName: string): string[] => {
   const project = new Project();
-  const sourceFile = project.addSourceFileAtPath(`./${path}/${intName}.ts`);
-  const node = sourceFile.getInterface(intName)!;
-  const allKeys = node.getProperties().map((p) => p.getName());
+  const nodes = project.addSourceFilesAtPaths(`**/*.ts`);
+  let allKeys;
+  for (const node of Object.values(nodes)) {
+    const interfc = node.getInterface(intName);
+    if (interfc) {
+      allKeys = interfc.getProperties().map((p) => p.getName());
+      break;
+    }
+  }
+  if (!allKeys) {
+    throw new Error(`Interface ${intName} was not found at`);
+  }
   return allKeys;
 };
-export { getKeys, changePath };
+export { getKeys };
